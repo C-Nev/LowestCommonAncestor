@@ -12,6 +12,7 @@ public class LCATest {
 	 * Insert 
 	 * Get - Done
 	 * Delete - Done
+	 * Contains - Done
 	 * Then need to test LCA functions
 	 *
 	 */
@@ -118,6 +119,22 @@ public class LCATest {
         BT.delete(3);
         assertEquals("Deleting node with two children",
                 "(((()1())2(()4(()5())))7())", BT.printTree());
+	}
+	@Test
+	public void testContains() {
+		BinaryTree<Character, Character> BT = new BinaryTree<Character, Character>();
+		//Test Empty tree 
+		assertFalse("Test get on empty tree", BT.contains('a'));
+		//Insert a bunch of values
+		BT.insert('w', 'w');
+		BT.insert('x', 'x');
+		BT.insert('y', 'y');
+		BT.insert('z', 'z');
+		//Confirm null when get() value that isn't in tree
+		assertFalse("Testing get on multiple node tree that doesn't contain key", BT.contains('a'));
+		//Test get on valid value 
+		//Cast to char because return type is value
+		assertTrue("Testing get on multiple node tree that does contain key",  BT.contains('w')); 
 	}
 
 }
