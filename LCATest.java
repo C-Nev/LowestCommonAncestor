@@ -10,8 +10,8 @@ public class LCATest {
 	 * Print -Done
 	 * Size - Done
 	 * Insert 
-	 * Get 
-	 * Delete 
+	 * Get - Done
+	 * Delete - Done
 	 * Then need to test LCA functions
 	 *
 	 */
@@ -72,7 +72,52 @@ public class LCATest {
 		assertNull("Testing get on multiple node tree that doesn't contain key", BT.get('a'));
 		//Test get on valid value 
 		//Cast to char because return type is value
-		assertEquals("Testing get on multiple node tree that does contain key", 'c', (char) BT.get('c')); 
+		assertEquals("Testing get on multiple node tree that does contain key", 'w', (char) BT.get('w')); 
+	}
+	@Test
+	public void testDelete(){
+		/*
+		 * Unlike other functions this is also ripped from second year Data Structures module
+		 */
+		BinaryTree<Integer, Integer> BT = new BinaryTree<Integer, Integer>();
+		
+		//Test empty tree deletion
+		BT.delete(1);
+        assertEquals("Deleting from empty tree", "()", BT.printTree());
+        
+        
+        BT.insert(7, 7);   //        _7_
+        BT.insert(8, 8);   //      /     \
+        BT.insert(3, 3);   //    _3_      8
+        BT.insert(1, 1);   //  /     \
+        BT.insert(2, 2);   // 1       6
+        BT.insert(6, 6);   //  \     /
+        BT.insert(4, 4);   //   2   4
+        BT.insert(5, 5);   //        \
+                         //         5
+        
+        assertEquals("Testing constructed tree is as expected.",
+                "(((()1(()2()))3((()4(()5()))6()))7(()8()))", BT.printTree());
+        
+        //Test deleting key not present in tree. Should have no effect.
+        BT.delete(9);
+        assertEquals("Deleting non-existent key",
+                "(((()1(()2()))3((()4(()5()))6()))7(()8()))", BT.printTree());
+
+        
+        //Test deleting leaf.
+        BT.delete(8);
+        assertEquals("Deleting leaf", "(((()1(()2()))3((()4(()5()))6()))7())", BT.printTree());
+
+        //Test deleting node with single child.
+        BT.delete(6);
+        assertEquals("Deleting node with single child",
+                "(((()1(()2()))3(()4(()5())))7())", BT.printTree());
+
+        //Test deleting node with two children
+        BT.delete(3);
+        assertEquals("Deleting node with two children",
+                "(((()1())2(()4(()5())))7())", BT.printTree());
 	}
 
 }
