@@ -5,8 +5,14 @@ import org.junit.Test;
 public class LCATest {
 
 	/*
-	 * Will need to test all Binary Tree Functions Empty -Done Print -Done
-	 * Insert Get Delete Then need to test LCA functions
+	 * Will need to test all Binary Tree Functions 
+	 * Empty -Done 
+	 * Print -Done
+	 * Size - Done
+	 * Insert 
+	 * Get 
+	 * Delete 
+	 * Then need to test LCA functions
 	 *
 	 */
 
@@ -50,6 +56,23 @@ public class LCATest {
 		BT.insert('z', 'z');
 
 		assertEquals("Many node test print", "(()a(()w(()x(()y(()z())))))", BT.printTree());
+	}
+	
+	@Test
+	public void testGet() {
+		BinaryTree<Character, Character> BT = new BinaryTree<Character, Character>();
+		//Test Empty tree 
+		assertNull("Test get on empty tree", BT.get('a'));
+		//Insert a bunch of values
+		BT.insert('w', 'w');
+		BT.insert('x', 'x');
+		BT.insert('y', 'y');
+		BT.insert('z', 'z');
+		//Confirm null when get() value that isn't in tree
+		assertNull("Testing get on multiple node tree that doesn't contain key", BT.get('a'));
+		//Test get on valid value 
+		//Cast to char because return type is value
+		assertEquals("Testing get on multiple node tree that does contain key", 'c', (char) BT.get('c')); 
 	}
 
 }
