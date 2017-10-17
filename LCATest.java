@@ -19,7 +19,10 @@ public class LCATest {
 	public void testEmptyTree()
 	{
 		//Test isEmpty Function
-	     	     
+		BinaryTree<Character, Character> BT = new BinaryTree<Character, Character>();
+		assertTrue(BT.isEmpty());
+		BT.insert('a', 'a');
+		assertFalse(BT.isEmpty());
 	}
 	@Test
 	public void testPrintTree()
