@@ -136,5 +136,37 @@ public class LCATest {
 		//Cast to char because return type is value
 		assertTrue("Testing get on multiple node tree that does contain key",  BT.contains('w')); 
 	}
+	@Test
+	public void testInsert() {
+		BinaryTree<Character, Character> BT = new BinaryTree<Character, Character>();
+		
+		//Test creating an node
+		BT.insert('a', 'a');
+		assertTrue("Testing insert on empty tree",  BT.contains('a'));
+		
+		//Test node sorting when inserted
+		BT.insert('x', 'x');
+		BT.insert('y', 'y');
+		BT.insert('z', 'z');
+		//Tests order with print function
+		assertEquals("Testing insert of multiple nodes into tree", 
+				"(()a(()x(()y(()z()))))", BT.printTree());
+		
+		//Test update of value in tree.
+		BT.insert('q', 'f');
+		assertEquals("Testing insert of multiple nodes into tree", 
+				'f', (char)BT.get('q'));
+		
+		//Testing insert of null value. (Should delete node)
+		BT.insert('y', null);
+		assertEquals("Testing insert of null value into tree", 
+				"(()a((()q())x(()z())))", BT.printTree());
+		
+		//Testing insert of null key. (Should have no effect)
+		BT.insert(null, 'Q');
+		assertEquals("Testing insert of null key into tree", 
+				"(()a((()q())x(()z())))", BT.printTree());
+
+	}
 
 }
