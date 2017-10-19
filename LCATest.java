@@ -131,10 +131,10 @@ public class LCATest {
 		BT.insert('y', 'y');
 		BT.insert('z', 'z');
 		//Confirm null when get() value that isn't in tree
-		assertFalse("Testing get on multiple node tree that doesn't contain key", BT.contains('a'));
+		assertFalse("Test contain on many node tree that doesn't contain key", BT.contains('a'));
 		//Test get on valid value 
 		//Cast to char because return type is value
-		assertTrue("Testing get on multiple node tree that does contain key",  BT.contains('w')); 
+		assertTrue("Test contains on many node tree that does contain key",  BT.contains('w')); 
 	}
 	@Test
 	public void testInsert() {
@@ -167,6 +167,43 @@ public class LCATest {
 		assertEquals("Testing insert of null key into tree", 
 				"(()a((()q())x(()z())))", BT.printTree());
 
+	}
+	@Test
+	public void testLCA(){
+		//Lowest Common Ancestor should require two keys and return key of LCA.	
+		BinaryTree<Integer, Integer> BT = new BinaryTree<Integer, Integer>();
+		
+		//Testing empty tree.
+		assertNull("Test LCA on empty tree", BT.LCA(1337, 212));
+		
+		//Testing one-node tree.
+		BT.insert(1,1);
+		
+		//If parameters are not in tree then return null - should return null.	
+		//One key present.
+		assertNull("Test single node tree passed invalid keys", BT.LCA(2,1));
+		
+		//Both non-present keys.
+		assertNull("Test single node tree passed invalid keys", BT.LCA(2,3));
+		
+		//Testing multi-node tree
+
+	       	BT.insert(2, 2);   
+	        BT.insert(3, 3);   
+	        BT.insert(4, 4);   
+	        BT.insert(5, 5);   
+	        BT.insert(6, 6);   
+	        BT.insert(7, 7);   
+	        BT.insert(8, 8);   
+	        BT.insert(9, 9);   
+		
+	    //If either given key is the root, should return the root
+		assertEquals("Test single node tree passed root's key", 2, (int)BT.LCA(7,2));    
+	        
+	    assertEquals("Test many node tree", 4, (int)BT.LCA(6,4));
+	    assertEquals("Test many node tree", 3, (int)BT.LCA(5,3));
+	    assertEquals("Test many node tree", 1, (int)BT.LCA(1,7));
+	    assertEquals("Test many node tree", 2, (int)BT.LCA(3,2));
 	}
 
 }
