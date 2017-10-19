@@ -32,14 +32,12 @@ public class BinaryTree<Key extends Comparable<Key>, Value> {
             this.N = N;
         }
     }
-    
-
-//TODO Test below function.    
-    // is the symbol table empty?
+       
+    // is the Tree empty?
+    // return boolean
     public boolean isEmpty() { return size() == 0; }
 
-    
-//TODO Test below function.    
+        
     // return number of key-value pairs in BST
     public int size() { return size(root); }   
     
@@ -173,10 +171,35 @@ public class BinaryTree<Key extends Comparable<Key>, Value> {
     	return x;
     }
 
-//TODO Test below function.
     //Small function to determine if a key is present in the tree.
     public boolean contains(Key x){
     	return(get(x)!=null);
     }
+    
+    public Key LCA(Key x, Key y) {
+    	if (root == null){
+			return null;			//If tree is empty return null.
+		}
+    	if(!contains(x) || !contains(y)){
+    		return null;			//If it doesn't contain either of our values
+    	}
+    	return LCA(root, x, y);		//call private LCA function
+    }
+    //recursively cycles through tree finding the LCA
+	private Key LCA(Node n, Key x, Key y) {
+		
+		int compareX = n.key.compareTo(x);
+		int compareY = n.key.compareTo(y);
+		
+		if(compareX > 0 && compareY > 0){
+			return LCA(n.left, x, y);
+		}
+		else if(compareX < 0 && compareY < 0){
+			return LCA(n.right, x, y);
+		}
+		else{
+			return n.key;
+		}	
+	}
     
 }
